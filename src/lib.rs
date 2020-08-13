@@ -216,7 +216,6 @@ impl Default for Time {
     }
 }
 
-
 // Unit tests
 #[cfg(test)]
 mod tests {
@@ -297,4 +296,3 @@ pub fn duration_to_nanos(duration: Duration) -> u64 {
 pub fn nanos_to_duration(nanos: u64) -> Duration {
     Duration::new(nanos / 1_000_000_000, (nanos % 1_000_000_000) as u32)
 }
-
