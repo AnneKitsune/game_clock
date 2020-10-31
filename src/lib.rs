@@ -67,8 +67,7 @@ impl Time {
     /// Updates the struct to reflect the changes of this frame.
     /// This should be called before using step_fixed_update.
     pub fn advance_frame(&mut self, time_diff: Duration) {
-        let secs = duration_to_secs(time_diff);
-        self.delta_time = secs_to_duration(secs * self.time_scale as f64);
+        self.delta_time = time_diff.clone().mul_f32(self.time_scale);
         self.delta_real_time = time_diff;
         self.frame_number += 1;
 
@@ -121,13 +120,8 @@ impl Default for Time {
 }
 
 /// Converts a Duration to the time in seconds.
-pub fn duration_to_secs(duration: Duration) -> f64 {
+pub fn duration_as_secs(duration: Duration) -> f64 {
     duration.as_secs() as f64 + (f64::from(duration.subsec_nanos()) / 1.0e9)
-}
-
-/// Converts a time in seconds to a duration
-pub fn secs_to_duration(secs: f64) -> Duration {
-    Duration::new(secs as u64, ((secs % 1.0) * 1.0e9) as u32)
 }
 
 #[cfg(test)]
@@ -139,13 +133,13 @@ mod tests {
     #[test]
     fn fixed_update_120fps() {
         let mut time = Time::default();
-        time.set_fixed_time(secs_to_duration(1.0 / 120.0));
+        time.set_fixed_time(Duration::from_secs_f64(1.0 / 120.0));
         time.set_time_scale(10.0);
 
         let step = 1.0 / 60.0;
         let mut fixed_count = 0;
         for _ in 0..60 {
-            time.advance_frame(secs_to_duration(step));
+            time.advance_frame(Duration::from_secs_f64(step));
             while time.step_fixed_update() {
                 fixed_count += 1;
             }
@@ -159,18 +153,50 @@ mod tests {
     #[test]
     fn fixed_update_1sec() {
         let mut time = Time::default();
-        time.set_fixed_time(secs_to_duration(1.0));
+        time.set_fixed_time(Duration::from_secs_f64(1.0));
 
         let step = 1.0 / 60.0;
         let mut fixed_count = 0;
         for _ in 0..130 {
             // Run two seconds
-            time.advance_frame(secs_to_duration(step));
+            time.advance_frame(Duration::from_secs_f64(step));
             while time.step_fixed_update() {
                 fixed_count += 1;
             }
         }
         assert_eq!(fixed_count, 2);
+    }
+
+    #[test]
+    fn all_getters() {
+        use std::time::Duration;
+
+        let mut time = Time::default();
+        time.set_time_scale(2.0);
+        time.set_fixed_time(Duration::from_secs_f64(1.0 / 120.0));
+        let step = 1.0/60.0;
+        time.advance_frame(Duration::from_secs_f64(step));
+        assert_eq!(time.time_scale(), 2.0);
+        assert!(approx_zero(time.delta_time().as_secs_f64() - step * 2.0));
+        assert!(approx_zero(time.delta_real_time().as_secs_f64() - step));
+        assert!(approx_zero(time.absolute_time().as_secs_f64() - step * 2.0));
+        assert!(approx_zero(time.absolute_real_time().as_secs_f64() - step));
+        assert_eq!(time.frame_number(), 1);
+        assert_eq!(time.time_scale(), 2.0);
+        assert_eq!(time.fixed_time(), Duration::from_secs_f64(1.0 / 120.0));
+
+        time.advance_frame(Duration::from_secs_f64(step));
+        assert_eq!(time.time_scale(), 2.0);
+        assert!(approx_zero(time.delta_time().as_secs_f64() - step * 2.0));
+        assert!(approx_zero(time.delta_real_time().as_secs_f64() - step));
+        assert!(approx_zero(time.absolute_time().as_secs_f64() - step * 4.0));
+        assert!(approx_zero(time.absolute_real_time().as_secs_f64() - step * 2.0));
+        assert_eq!(time.frame_number(), 2);
+        assert_eq!(time.time_scale(), 2.0);
+        assert_eq!(time.fixed_time(), Duration::from_secs_f64(1.0 / 120.0));
+    }
+    fn approx_zero(v: f64) -> bool {
+        v >= -0.000001 && v <= 0.000001
     }
 }
 
