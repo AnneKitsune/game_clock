@@ -1,4 +1,4 @@
-use game_time::Time;
+use game_clock::Time;
 use std::time::Duration;
 fn main() {
     let mut time = Time::default();
