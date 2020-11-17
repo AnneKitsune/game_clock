@@ -35,3 +35,5 @@ Commercial license available: yes
 
 ### Licence
 AGPL-3.0. You can buy commercial licenses [here](https://jojolepro.com/focks/).
+See full license in LICENSE file.
+Copyright (C) 2020 Jojolepro.
