@@ -119,11 +119,6 @@ impl Default for Time {
     }
 }
 
-/// Converts a Duration to the time in seconds.
-pub fn duration_as_secs(duration: Duration) -> f64 {
-    duration.as_secs() as f64 + (f64::from(duration.subsec_nanos()) / 1.0e9)
-}
-
 #[cfg(test)]
 mod tests {
     use crate::*;
