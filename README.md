@@ -28,12 +28,16 @@ fn main() {
 
 ### Focks Team Information
 Maintainer: Jojolepro
+
 Contact: jojolepro [at] jojolepro [dot] com
+
 Commercial license available: yes
 
 [Focks Team Website](https://jojolepro.com/focks)
 
 ### Licence
 AGPL-3.0. You can buy commercial licenses [here](https://jojolepro.com/focks/).
+
 See full license in LICENSE file.
+
 Copyright (C) 2020 Jojolepro.
