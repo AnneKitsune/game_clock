@@ -1,6 +1,6 @@
 [package]
 name = "game_clock"
-version = "1.0.0"
+version = "1.1.0"
 description = "Provides a clock for game (engines) that is simple to use and efficient."
 keywords = ["game", "time"]
 documentation = "https://docs.rs/game_clock"
