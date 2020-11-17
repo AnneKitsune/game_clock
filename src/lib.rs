@@ -174,7 +174,7 @@ mod tests {
         let mut time = Time::default();
         time.set_time_scale(2.0);
         time.set_fixed_time(Duration::from_secs_f64(1.0 / 120.0));
-        let step = 1.0/60.0;
+        let step = 1.0 / 60.0;
         time.advance_frame(Duration::from_secs_f64(step));
         assert_eq!(time.time_scale(), 2.0);
         assert!(approx_zero(time.delta_time().as_secs_f64() - step * 2.0));
@@ -190,7 +190,9 @@ mod tests {
         assert!(approx_zero(time.delta_time().as_secs_f64() - step * 2.0));
         assert!(approx_zero(time.delta_real_time().as_secs_f64() - step));
         assert!(approx_zero(time.absolute_time().as_secs_f64() - step * 4.0));
-        assert!(approx_zero(time.absolute_real_time().as_secs_f64() - step * 2.0));
+        assert!(approx_zero(
+            time.absolute_real_time().as_secs_f64() - step * 2.0
+        ));
         assert_eq!(time.frame_number(), 2);
         assert_eq!(time.time_scale(), 2.0);
         assert_eq!(time.fixed_time(), Duration::from_secs_f64(1.0 / 120.0));
@@ -199,4 +201,3 @@ mod tests {
         v >= -0.000001 && v <= 0.000001
     }
 }
-
