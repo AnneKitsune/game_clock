@@ -1,8 +1,20 @@
+<a href="https://crates.io/crates/game_clock">
+    <img src="https://img.shields.io/crates/v/game_clock.svg" alt="Game Clock" />
+</a>
+
 # Game Clock
-A simple to use clock for games.
+Support an Open Source Developer! :hearts:  
+[![Become a patron](https://c5.patreon.com/external/logo/become_a_patron_button.png)](https://www.patreon.com/jojolepro)
+
+Read the [documentation](https://docs.rs/game_clock).
+
+# Features
+
+* Adds a simple clock for use in games and game engines.
 
 # Usage
 Add the following to you Cargo.toml file:
+
 ```
 game_clock = "1.0.0"
 ```
@@ -25,19 +37,10 @@ fn main() {
     }
 }
 ```
+### Maintainer Information
 
-### Focks Team Information
-Maintainer: Jojolepro
+* Maintainer: Jojolepro
+* Contact: jojolepro [at] jojolepro [dot] com
+* Website: [jojolepro.com](https://jojolepro.com)
+* Patreon: [patreon](https://patreon.com/jojolepro)
 
-Contact: jojolepro [at] jojolepro [dot] com
-
-Commercial license available: yes
-
-[Focks Team Website](https://jojolepro.com/focks)
-
-### Licence
-AGPL-3.0. You can buy commercial licenses [here](https://jojolepro.com/focks/).
-
-See full license in LICENSE file.
-
-Copyright (C) 2020 Jojolepro.
