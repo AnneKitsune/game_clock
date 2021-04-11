@@ -1,7 +1,9 @@
 //! Utilities for working with time in games.
 //!
-//! Original from the Amethyst Engine.
-//! Under the dual license Apache/MIT.
+//! Original version from the Amethyst Engine under the dual license Apache/MIT.
+//!
+//! This is a rework of the original `Time` struct. It has been heavily simplified
+//! and documentation has been added.
 
 use std::time::Duration;
 
