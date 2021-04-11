@@ -16,7 +16,7 @@ Read the [documentation](https://docs.rs/game_clock).
 Add the following to you Cargo.toml file:
 
 ```
-game_clock = "1.0.0"
+game_clock = "*"
 ```
 
 Use the clock like so:
